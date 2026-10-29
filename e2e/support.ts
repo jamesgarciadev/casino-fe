@@ -8,7 +8,7 @@ type Account = { name: string; email: string; password: string };
 const demo = (role: string): Account => ({
   name: `${role[0].toUpperCase()}${role.slice(1)} Demo`,
   email: `${role}@casino.test`,
-  password: "password",
+  password: "Password1!",
 });
 
 export const STAFF = { owner: demo("owner"), admin: demo("admin"), moderator: demo("moderator") };
@@ -28,7 +28,7 @@ export async function sessionCookie(context: BrowserContext) {
 /** Creates a throwaway customer straight through be's public `register` mutation. */
 export async function createCustomer(request: APIRequestContext, label = "player"): Promise<Account> {
   const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-  const account = { name: `E2E ${label} ${id}`, email: `e2e-${label}-${id}@example.com`, password: "e2e-password" };
+  const account = { name: `E2E ${label} ${id}`, email: `e2e-${label}-${id}@example.com`, password: "E2e-Password1!" };
 
   const response = await request.post(API_URL, {
     data: {
