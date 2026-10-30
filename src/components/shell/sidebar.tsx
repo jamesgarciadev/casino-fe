@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 
+import { BrandMark, Wordmark } from "@/components/brand";
 import { Icon } from "@/components/shell/icons";
 import { useUiStore } from "@/providers/ui-store-provider";
 
@@ -23,8 +24,10 @@ export function Sidebar({ children }: { children: ReactNode }) {
         }`}
       >
         <div className="flex h-14 items-center gap-2.5 border-b border-white/10 px-4">
-          <div className="grid size-8 shrink-0 place-items-center rounded-md bg-primary text-xs font-bold text-white">CA</div>
-          <span className="truncate text-sm font-semibold text-white group-data-collapsed/sidebar:lg:hidden">Casino Admin</span>
+          <BrandMark />
+          <span className="truncate text-sm text-white group-data-collapsed/sidebar:lg:hidden">
+            <Wordmark />
+          </span>
         </div>
 
         <div className="flex-1 overflow-y-auto px-2 py-4">{children}</div>

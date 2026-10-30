@@ -1,7 +1,11 @@
 # casino-fe
 
-Internal admin console for moderators, admins and owners. Next.js 16 (App Router, Cache Components), Zustand, Zod, urql.
-Talks only to `casino-be` over GraphQL. See [ARCHITECTURE.md](ARCHITECTURE.md).
+**0dds.bet Admin**, the internal console for moderators, admins and owners. Next.js 16 (App Router, Cache Components),
+Zustand, Zod, urql. Talks only to `casino-be` over GraphQL. See [ARCHITECTURE.md](ARCHITECTURE.md).
+
+There is no admin design in `../casino-design`, so the console keeps its own layout and wears the customer app's
+"Crimson Heat" palette and fonts (`src/app/globals.css`). It is dark-only: `dark:` utilities follow the `dark` class
+on `<html>`.
 
 ## Run locally
 
@@ -51,4 +55,5 @@ reuse those sessions via `storageState`. Test customers are created through `be`
 - Sign-in uses `adminLogin`, which issues an `admin`-scoped token (8h) kept in an httpOnly, SameSite=strict cookie.
 - The sidebar hides sections the staff member lacks permission for. That is UX only; `be` authorizes every query and mutation.
 - Role changes (owner only) are audit-logged in `be` and show up under **Audit log**.
+- casino-sim's service account (`simulator@casino.internal`) is listed with a read-only badge; be refuses role changes to it.
 - In production, put this app behind SSO / 2FA / an IP allowlist at the edge.

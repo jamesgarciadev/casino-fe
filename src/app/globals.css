@@ -1,37 +1,33 @@
 @import "tailwindcss";
 
-/* Neutral enterprise admin theme: slate surfaces, one indigo action colour, light and dark. */
-:root {
-  --bg: #f4f6f9;
-  --surface: #ffffff;
-  --surface-muted: #f8fafc;
-  --border: #e2e8f0;
-  --fg: #0f172a;
-  --muted: #64748b;
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-fg: #ffffff;
-  --sidebar: #0f172a;
-  --sidebar-fg: #cbd5e1;
-  --sidebar-active: #1e293b;
-}
+/*
+ * 0dds.bet admin theme: the customer app's "Crimson Heat" palette (casino-design/src/styles.css) on the console's
+ * own token names. Dark-only, like the design; `dark:` utilities follow the `dark` class on <html>.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-muted: #0f172a;
-    --border: #1f2937;
-    --fg: #e5e7eb;
-    --muted: #94a3b8;
-    --primary: #6366f1;
-    --primary-hover: #818cf8;
-    --sidebar: #020617;
-    --sidebar-active: #111827;
-  }
+:root {
+  --bg: oklch(0.145 0.018 15);
+  --surface: oklch(0.195 0.02 12);
+  --surface-muted: oklch(0.235 0.02 12);
+  --border: oklch(1 0 0 / 9%);
+  --fg: oklch(0.955 0.008 20);
+  --muted: oklch(0.68 0.02 20);
+  --primary: oklch(0.586 0.253 17.6);
+  --primary-hover: oklch(0.64 0.24 17.6);
+  --primary-fg: oklch(0.985 0.01 20);
+  --accent: oklch(0.75 0.183 55.9);
+  --live: oklch(0.77 0.19 152);
+  --sidebar: oklch(0.12 0.016 15);
+  --sidebar-fg: oklch(0.8 0.015 20);
+  --sidebar-active: oklch(0.235 0.03 15);
+  color-scheme: dark;
 }
 
 @theme inline {
+  --color-accent: var(--accent);
+  --color-live: var(--live);
+  --font-display: var(--font-jetbrains-mono), ui-monospace, monospace;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
@@ -44,13 +40,20 @@
   --color-sidebar: var(--sidebar);
   --color-sidebar-fg: var(--sidebar-fg);
   --color-sidebar-active: var(--sidebar-active);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 @layer components {

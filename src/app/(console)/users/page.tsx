@@ -77,7 +77,9 @@ async function UsersResults({ searchParams }: Pick<PageProps<"/users">, "searchP
       header: "Role",
       cell: (row) => {
         const role = row.roles[0] ?? "customer";
-        return canManageRoles && row.id !== staff.id ? <RoleSelect userId={row.id} current={role} /> : <RoleBadge role={role} />;
+        // Your own role and casino-sim's service account are not editable here (be refuses both).
+        const editable = canManageRoles && row.id !== staff.id && role !== "simulator";
+        return editable ? <RoleSelect userId={row.id} current={role} /> : <RoleBadge role={role} />;
       },
     },
     { key: "id", header: "ID", className: "font-mono text-xs text-muted", cell: (row) => row.id },
