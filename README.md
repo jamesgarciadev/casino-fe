@@ -28,7 +28,9 @@ Ports: **3001** dev server. The end-to-end suite uses its own 3101 (app) and 810
 ## Start it up
 
 ```sh
-# 1. In casino-be (see its README): docker compose up -d --wait, php artisan serve
+# 1. In casino-be (see its README), one command per terminal:
+#      docker compose up -d --wait
+#      php artisan serve
 
 npm install                  # 2.
 cp .env.example .env.local   # 3. CASINO_API_URL already points at http://localhost:8000/graphql

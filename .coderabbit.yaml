@@ -25,7 +25,8 @@ reviews:
     - path: "src/lib/**"
       instructions: |
         The admin token stays in the httpOnly, SameSite=strict cookie and on the server. The browser only calls the
-        same-origin /api/graphql proxy. Mutations are Server Actions and validate input with Zod.
+        same-origin /api/graphql proxy for interactive queries and mutations. Token-issuing mutations (login, register,
+        adminLogin) only run from Server Actions, which the proxy enforces. Server Action input is validated with Zod.
     - path: "src/components/**"
       instructions: |
         casino-sim's service account is shown read-only. Role changes are owner-only and audit-logged by be.
