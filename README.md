@@ -1,24 +1,45 @@
 # casino-fe
 
-**0dds.bet Admin**, the internal console for moderators, admins and owners. Next.js 16 (App Router, Cache Components),
-Zustand, Zod, urql. Talks only to `casino-be` over GraphQL. See [ARCHITECTURE.md](ARCHITECTURE.md).
+**0dds.bet Admin**, the internal console for moderators, admins and owners. Talks only to `casino-be` over GraphQL.
+See [ARCHITECTURE.md](ARCHITECTURE.md).
 
 There is no admin design in `../casino-design`, so the console keeps its own layout and wears the customer app's
 "Crimson Heat" palette and fonts (`src/app/globals.css`). It is dark-only: `dark:` utilities follow the `dark` class
 on `<html>`.
 
-## Run locally
+## Tech stack
 
-Requires `casino-be` running on http://localhost:8000, with the repos cloned side by side.
+| Layer | What we use |
+|---|---|
+| Framework | Next.js 16.4 (App Router, Cache Components), React 19.3, TypeScript 5 |
+| Styling | Tailwind CSS 4 |
+| State and data | Zustand, urql (GraphQL client in the browser), GraphQL Code Generator (types and Zod base schemas from casino-be's schema) |
+| Forms and validation | react-hook-form and Zod 4 |
+| Tests and lint | Playwright 1.64 (end to end), ESLint 9 |
+
+## Prerequisites
+
+- Node.js 20.9 or newer (Next 16's minimum) and npm
+- `casino-be` running on http://localhost:8000, with the repos cloned side by side
+  (`npm run codegen` reads `../casino-be/graphql/schema.public.graphql`)
+
+Ports: **3001** dev server. The end-to-end suite uses its own 3101 (app) and 8101 (be).
+
+## Start it up
 
 ```sh
-npm install
-cp .env.example .env.local
-npm run codegen   # types + Zod base schemas from ../casino-be/graphql/schema.public.graphql
-npm run dev       # http://localhost:3001
+# 1. In casino-be (see its README): docker compose up -d --wait, php artisan serve
+
+npm install                  # 2.
+cp .env.example .env.local   # 3. CASINO_API_URL already points at http://localhost:8000/graphql
+npm run codegen              # 4. types + Zod base schemas from casino-be's schema
+npm run dev                  # 5. http://localhost:3001
 ```
 
-Sign in with `owner@casino.test`, `admin@casino.test` or `moderator@casino.test` (password `Password1!`).
+It is working when the sign-in page loads and `owner@casino.test`, `admin@casino.test` or `moderator@casino.test`
+(password `Password1!`) reach the dashboard. Customers are refused here; they sign in to `casino-web`.
+
+Other scripts: `npm run lint`, `npm run typecheck`, `npm run build` then `npm start` for a production build.
 
 ## End-to-end tests (Playwright)
 
