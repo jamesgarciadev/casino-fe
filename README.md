@@ -52,7 +52,8 @@ npm run test:e2e:ui               # interactive runner
 npm run test:e2e:report           # open the last HTML report (traces + screenshots on failure)
 ```
 
-Requires Docker MySQL from `casino-be` to be up. The suite starts its own isolated stack, separate from your dev servers:
+Requires Docker MySQL from `casino-be` to be up. The suite starts its own isolated stack, separate from your dev servers.
+Outside CI, Playwright reuses anything already listening on ports 8101 or 3101 instead, so stop those first:
 
 | Piece | Port | Notes |
 |---|---|---|
