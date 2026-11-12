@@ -20,6 +20,15 @@ npm run dev       # http://localhost:3001
 
 Sign in with `owner@casino.test`, `admin@casino.test` or `moderator@casino.test` (password `Password1!`).
 
+## CI
+
+GitHub Actions (`.github/workflows/ci.yml`) runs on every pull request and on main:
+
+- **Codegen, types and lint**: regenerates `src/gql` from casino-be's main schema and fails if it differs, then
+  typecheck and lint.
+- **Playwright**: the full E2E suite, with casino-be checked out next to this repo (the branch of the same name if it
+  exists, otherwise main) and MySQL and Redis as services.
+
 ## End-to-end tests (Playwright)
 
 ```sh
